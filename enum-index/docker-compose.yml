@@ -1,0 +1,19 @@
+version: '3'
+
+services:
+  mysql:
+    image: mysql:5.7
+    environment:
+      MYSQL_ROOT_PASSWORD: my_secret_password
+      MYSQL_DATABASE: db
+      MYSQL_USER: db_user
+      MYSQL_PASSWORD: db_user_pass
+  db-profile:
+    image: plopix/docker-mysqlproxyprofiler
+    depends_on:
+      - mysql
+    ports:
+      - 3306:3306
+    environment:
+      BACKEND: "mysql:3306"
+    
